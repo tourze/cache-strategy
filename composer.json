@@ -1,0 +1,27 @@
+{
+  "name": "tourze/cache-strategy",
+  "description": "Cache strategy interface",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^8.1",
+    "symfony/dependency-injection": "^6.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0",
+    "phpstan/phpstan": "^2.1"
+  },
+  "scripts": {
+    "phpstan": "phpstan analyse src -l 1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tourze\\CacheStrategy\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tourze\\CacheStrategy\\Tests\\": "tests/"
+    }
+  }
+}
