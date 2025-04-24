@@ -1,66 +1,122 @@
 # Cache Strategy
 
-这个包提供了一个用于定义缓存策略的接口，可以帮助确定哪些数据库查询应该被缓存。
+[![Latest Version](https://img.shields.io/packagist/v/tourze/cache-strategy.svg?style=flat-square)](https://packagist.org/packages/tourze/cache-strategy)
+[![MIT License](https://img.shields.io/packagist/l/tourze/cache-strategy.svg?style=flat-square)](https://github.com/tourze/cache-strategy/blob/main/LICENSE)
 
-## 安装
+This package provides an interface for defining cache strategies that help determine which database queries should be cached.
+
+## Features
+
+- Simple interface for implementing custom cache strategies
+- Built-in `NoCacheStrategy` implementation for basic usage
+- Symfony DependencyInjection integration with autoconfiguration support
+- No external dependencies other than Symfony DependencyInjection
+- Compatible with PHP 8.1 and above
+
+## Installation
+
+You can install this package using Composer:
 
 ```bash
 composer require tourze/cache-strategy
 ```
 
-## 使用方法
+### Requirements
 
-这个包定义了 `CacheStrategy` 接口，你可以实现这个接口来创建自定义的缓存策略。
+- PHP 8.1 or higher
+- Symfony DependencyInjection 6.4 or higher
 
-### CacheStrategy 接口
+## Quick Start
+
+The core of this package is the `CacheStrategy` interface which provides a method to determine whether a query should be cached:
 
 ```php
-interface CacheStrategy
-{
-    public function shouldCache(string $query, array $params): bool;
+<?php
+
+use Tourze\CacheStrategy\CacheStrategy;
+
+// Using the included NoCacheStrategy which caches all queries
+$strategy = new \Tourze\CacheStrategy\NoCacheStrategy();
+
+// Query and parameters
+$query = "SELECT * FROM users WHERE status = ?";
+$params = ['active'];
+
+// Determine if the query should be cached
+if ($strategy->shouldCache($query, $params)) {
+    // Cache the query result
 }
 ```
 
-接口中的 `shouldCache` 方法接收查询字符串和参数数组，返回一个布尔值表示该查询是否应该被缓存。
+## Usage
 
-### 预定义策略
+### CacheStrategy Interface
 
-该包包含了一个预定义的缓存策略：
-
-- `NoCacheStrategy`: 一个始终返回 `true` 的策略，表示所有查询都应该被缓存。
-
-### 自定义策略
-
-你可以通过实现 `CacheStrategy` 接口来创建自己的缓存策略：
+The `CacheStrategy` interface has a single method:
 
 ```php
+public function shouldCache(string $query, array $params): bool;
+```
+
+This method takes a query string and parameter array, returning a boolean indicating whether the query should be cached.
+
+### Predefined Strategies
+
+The package includes one predefined strategy:
+
+- `NoCacheStrategy`: A simple strategy that always returns `true`, indicating all queries should be cached.
+
+### Custom Strategies
+
+You can create your own cache strategies by implementing the `CacheStrategy` interface:
+
+```php
+<?php
+
+namespace App\Cache;
+
 use Tourze\CacheStrategy\CacheStrategy;
 
-class MyCustomStrategy implements CacheStrategy
+class SelectQueryStrategy implements CacheStrategy
 {
     public function shouldCache(string $query, array $params): bool
     {
-        // 实现你的逻辑，决定是否缓存查询
-        // 例如：只缓存 SELECT 查询
+        // Only cache SELECT queries
         return str_starts_with(strtoupper(trim($query)), 'SELECT');
     }
 }
 ```
 
-## 与 Symfony DependencyInjection 集成
+### Symfony Integration
 
-`CacheStrategy` 接口使用了 Symfony 的 `AutoconfigureTag` 属性，这使得它可以自动配置为服务。接口定义了常量 `SERVICE_TAG` 作为服务标签的名称：
+The `CacheStrategy` interface is marked with Symfony's `AutoconfigureTag` attribute, making it automatically configured as a service with the tag `doctrine.cache.entity_cache_strategy`:
 
 ```php
-const SERVICE_TAG = 'doctrine.cache.entity_cache_strategy';
+#[AutoconfigureTag(CacheStrategy::SERVICE_TAG)]
+interface CacheStrategy
+{
+    const SERVICE_TAG = 'doctrine.cache.entity_cache_strategy';
+    // ...
+}
 ```
 
-这使得 Symfony 的依赖注入容器可以自动标记实现了 `CacheStrategy` 接口的服务。
+This allows you to use dependency injection to collect all cache strategy services in your application.
 
-## 测试
+## Best Practices
 
-包内含一组单元测试。你可以通过以下命令运行测试：
+- Create specific cache strategies for different types of queries
+- Consider performance implications when implementing complex cache strategies
+- Use different strategies for read and write operations
+- Test your strategies with real-world query patterns
+
+## Testing
+
+The package includes unit tests. To run the tests:
 
 ```bash
 ./vendor/bin/phpunit packages/cache-strategy/tests
 ```
+
+## License
+
+This package is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
