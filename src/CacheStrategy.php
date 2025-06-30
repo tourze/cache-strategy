@@ -4,7 +4,7 @@ namespace Tourze\CacheStrategy;
 
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-#[AutoconfigureTag(CacheStrategy::SERVICE_TAG)]
+#[AutoconfigureTag(name: CacheStrategy::SERVICE_TAG)]
 interface CacheStrategy
 {
     const SERVICE_TAG = 'doctrine.cache.entity_cache_strategy';

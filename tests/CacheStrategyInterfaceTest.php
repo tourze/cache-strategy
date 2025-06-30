@@ -40,14 +40,14 @@ class CacheStrategyInterfaceTest extends TestCase
 
         // 验证第一个参数名和类型
         $this->assertSame('query', $parameters[0]->getName());
-        $this->assertSame('string', $parameters[0]->getType()->getName());
+        $this->assertSame('string', (string) $parameters[0]->getType());
 
         // 验证第二个参数名和类型
         $this->assertSame('params', $parameters[1]->getName());
-        $this->assertSame('array', $parameters[1]->getType()->getName());
+        $this->assertSame('array', (string) $parameters[1]->getType());
 
         // 验证返回类型是 bool
-        $this->assertSame('bool', $method->getReturnType()->getName());
+        $this->assertSame('bool', (string) $method->getReturnType());
     }
 
     /**
@@ -68,6 +68,6 @@ class CacheStrategyInterfaceTest extends TestCase
         // 断言 AutoconfigureTag 的参数是 SERVICE_TAG 常量
         $attributeArguments = $attributes[0]->getArguments();
         $this->assertCount(1, $attributeArguments);
-        $this->assertSame(CacheStrategy::SERVICE_TAG, $attributeArguments[0]);
+        $this->assertSame(CacheStrategy::SERVICE_TAG, $attributeArguments['name']);
     }
 }
