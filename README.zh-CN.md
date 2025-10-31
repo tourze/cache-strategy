@@ -1,7 +1,11 @@
 # 缓存策略
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 [![Latest Version](https://img.shields.io/packagist/v/tourze/cache-strategy.svg?style=flat-square)](https://packagist.org/packages/tourze/cache-strategy)
 [![MIT License](https://img.shields.io/packagist/l/tourze/cache-strategy.svg?style=flat-square)](https://github.com/tourze/cache-strategy/blob/main/LICENSE)
+[![PHP Version Require](https://img.shields.io/packagist/php-v/tourze/cache-strategy.svg?style=flat-square)](https://packagist.org/packages/tourze/cache-strategy)
+[![Code Coverage](https://img.shields.io/codecov/c/github/tourze/cache-strategy.svg?style=flat-square)](https://codecov.io/gh/tourze/cache-strategy)
 
 本包提供了一个用于定义缓存策略的接口，帮助确定哪些数据库查询应该被缓存。
 
@@ -11,7 +15,7 @@
 - 内置 `NoCacheStrategy` 实现，可直接使用
 - 与 Symfony 依赖注入容器无缝集成，支持自动配置
 - 除 Symfony DependencyInjection 外无其他外部依赖
-- 兼容 PHP 8.1 及以上版本
+- 兼容 PHP 8.2 及以上版本
 
 ## 安装方法
 
@@ -23,7 +27,7 @@ composer require tourze/cache-strategy
 
 ### 系统要求
 
-- PHP 8.1 或更高版本
+- PHP 8.2 或更高版本
 - Symfony DependencyInjection 6.4 或更高版本
 
 ## 快速上手
@@ -116,6 +120,26 @@ interface CacheStrategy
 ```bash
 ./vendor/bin/phpunit packages/cache-strategy/tests
 ```
+
+## 贡献指南
+
+欢迎贡献代码！请遵循以下准则：
+
+1. **问题反馈**：请通过 GitHub issue tracker 报告错误
+2. **拉取请求**：
+    - 遵循 PSR-12 编码规范
+    - 为新功能编写测试
+    - 提交前确保所有测试通过
+    - 保持提交内容专注并有良好的文档记录
+3. **文档更新**：添加新功能时更新 README 文件
+
+## 更新日志
+
+### [0.0.1] - 初始版本
+- 实现 `CacheStrategy` 接口的初始版本
+- 实现 `NoCacheStrategy` 策略
+- Symfony DependencyInjection 集成
+- 完整的测试覆盖
 
 ## 开源协议
 

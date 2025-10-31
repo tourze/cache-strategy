@@ -2,14 +2,25 @@
 
 namespace Tourze\CacheStrategy\Tests;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\CacheStrategy\CacheStrategy;
+use Tourze\PHPUnitSymfonyKernelTest\AbstractIntegrationTestCase;
 
 /**
  * 这个测试类用于验证 CacheStrategy 接口的规范
+ *
+ * @internal
  */
-class CacheStrategyInterfaceTest extends TestCase
+#[CoversClass(CacheStrategy::class)]
+#[RunTestsInSeparateProcesses]
+final class CacheStrategyInterfaceTest extends AbstractIntegrationTestCase
 {
+    protected function onSetUp(): void
+    {
+        // 这个测试不需要额外的设置
+    }
+
     /**
      * 测试 SERVICE_TAG 常量的值是否正确
      */

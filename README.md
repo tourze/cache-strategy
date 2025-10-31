@@ -1,7 +1,11 @@
 # Cache Strategy
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 [![Latest Version](https://img.shields.io/packagist/v/tourze/cache-strategy.svg?style=flat-square)](https://packagist.org/packages/tourze/cache-strategy)
 [![MIT License](https://img.shields.io/packagist/l/tourze/cache-strategy.svg?style=flat-square)](https://github.com/tourze/cache-strategy/blob/main/LICENSE)
+[![PHP Version Require](https://img.shields.io/packagist/php-v/tourze/cache-strategy.svg?style=flat-square)](https://packagist.org/packages/tourze/cache-strategy)
+[![Code Coverage](https://img.shields.io/codecov/c/github/tourze/cache-strategy.svg?style=flat-square)](https://codecov.io/gh/tourze/cache-strategy)
 
 This package provides an interface for defining cache strategies that help determine which database queries should be cached.
 
@@ -11,7 +15,7 @@ This package provides an interface for defining cache strategies that help deter
 - Built-in `NoCacheStrategy` implementation for basic usage
 - Symfony DependencyInjection integration with autoconfiguration support
 - No external dependencies other than Symfony DependencyInjection
-- Compatible with PHP 8.1 and above
+- Compatible with PHP 8.2 and above
 
 ## Installation
 
@@ -23,7 +27,7 @@ composer require tourze/cache-strategy
 
 ### Requirements
 
-- PHP 8.1 or higher
+- PHP 8.2 or higher
 - Symfony DependencyInjection 6.4 or higher
 
 ## Quick Start
@@ -116,6 +120,26 @@ The package includes unit tests. To run the tests:
 ```bash
 ./vendor/bin/phpunit packages/cache-strategy/tests
 ```
+
+## Contributing
+
+Contributions are welcome! Please see the following guidelines:
+
+1. **Reporting Issues**: Please report bugs through the GitHub issue tracker
+2. **Pull Requests**: 
+    - Follow PSR-12 coding standards
+    - Write tests for new features
+    - Ensure all tests pass before submitting
+    - Keep commits focused and well-documented
+3. **Documentation**: Update README files when adding new features
+
+## Changelog
+
+### [0.0.1] - Initial Release
+- Initial implementation of `CacheStrategy` interface
+- `NoCacheStrategy` implementation
+- Symfony DependencyInjection integration
+- Comprehensive test coverage
 
 ## License
 
